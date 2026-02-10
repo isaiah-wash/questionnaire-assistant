@@ -1,0 +1,13 @@
+{
+  "buildCommand": "echo 'No build needed'",
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.py" },
+    { "src": "/(.*\\.css)", "dest": "/frontend/$1" },
+    { "src": "/(.*\\.js)", "dest": "/frontend/$1" },
+    { "src": "/", "dest": "/frontend/index.html" }
+  ]
+}
