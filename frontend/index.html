@@ -4,103 +4,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questionnaire Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Questionnaire Assistant</h1>
-            <p class="subtitle">Auto-fill due diligence questionnaires using your previous responses</p>
-        </header>
 
-        <nav class="tabs">
-            <button class="tab active" data-tab="knowledge">Knowledge Base</button>
-            <button class="tab" data-tab="fill">Fill Questionnaire</button>
-            <button class="tab" data-tab="ask">Ask Question</button>
-        </nav>
+    <!-- Decorative background grid -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow" aria-hidden="true"></div>
 
-        <!-- Knowledge Base Tab -->
-        <section id="knowledge" class="tab-content active">
-            <div class="card">
-                <h2>Upload Completed Questionnaire</h2>
-                <p>Add your previously completed questionnaires to build the knowledge base.</p>
-                <div class="upload-area" id="knowledge-upload">
-                    <input type="file" id="knowledge-file" accept=".xlsx,.xls,.csv,.docx,.pdf" hidden>
-                    <label for="knowledge-file" class="upload-label">
-                        <span class="upload-icon">📄</span>
-                        <span>Drop file here or click to upload</span>
-                        <span class="upload-formats">Supported: Excel, CSV, Word, PDF</span>
-                    </label>
-                </div>
-                <div id="knowledge-upload-status"></div>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <svg class="brand-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <rect x="2" y="2" width="10" height="10" rx="2" fill="#4361ee"/>
+                    <rect x="16" y="2" width="10" height="10" rx="2" fill="#4361ee" opacity="0.5"/>
+                    <rect x="2" y="16" width="10" height="10" rx="2" fill="#4361ee" opacity="0.5"/>
+                    <rect x="16" y="16" width="10" height="10" rx="2" fill="#4361ee" opacity="0.3"/>
+                </svg>
+                <span class="brand-text">Questionnaire Assistant</span>
             </div>
+            <div class="nav-links">
+                <button class="nav-link active" data-screen="knowledge">
+                    <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                    </svg>
+                    <span class="nav-label">Knowledge Base</span>
+                </button>
+                <button class="nav-link" data-screen="fill">
+                    <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                        <path d="M9 14l2 2 4-4"/>
+                    </svg>
+                    <span class="nav-label">Fill Questionnaire</span>
+                </button>
+                <button class="nav-link" data-screen="ask">
+                    <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        <path d="M12 8v2"/>
+                        <circle cx="12" cy="14" r="0.5" fill="currentColor"/>
+                    </svg>
+                    <span class="nav-label">Ask Question</span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-            <div class="card">
-                <h2>Knowledge Base Stats</h2>
-                <div id="kb-stats" class="stats-grid">
-                    <div class="stat">
-                        <span class="stat-value" id="stat-total">-</span>
-                        <span class="stat-label">Q&A Pairs</span>
+    <!-- Screen Container -->
+    <main class="screen-container">
+
+        <!-- ==================== KNOWLEDGE BASE SCREEN ==================== -->
+        <section id="knowledge" class="screen active">
+            <div class="screen-content">
+                <div class="screen-header">
+                    <h1 class="screen-title">Knowledge Base</h1>
+                    <p class="screen-subtitle">Upload completed questionnaires to build your answer library</p>
+                </div>
+
+                <!-- Upload Card -->
+                <div class="card upload-card">
+                    <div class="upload-area" id="knowledge-upload">
+                        <input type="file" id="knowledge-file" accept=".xlsx,.xls,.csv,.docx,.pdf" hidden>
+                        <label for="knowledge-file" class="upload-label">
+                            <div class="upload-icon-wrapper">
+                                <svg class="upload-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="12" y1="18" x2="12" y2="12"/>
+                                    <polyline points="9,15 12,12 15,15"/>
+                                </svg>
+                            </div>
+                            <span class="upload-title">Drop file here or click to upload</span>
+                            <span class="upload-formats">Supports Excel, CSV, Word, PDF</span>
+                        </label>
                     </div>
-                    <div class="stat">
-                        <span class="stat-value" id="stat-sources">-</span>
-                        <span class="stat-label">Source Files</span>
+                    <div id="knowledge-upload-status"></div>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="card stats-card">
+                    <div class="stats-grid" id="kb-stats">
+                        <div class="stat-pill">
+                            <span class="stat-value" id="stat-total">-</span>
+                            <span class="stat-label">Q&A Pairs</span>
+                        </div>
+                        <div class="stat-pill">
+                            <span class="stat-value" id="stat-sources">-</span>
+                            <span class="stat-label">Source Files</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <h2>Source Files</h2>
-                <div id="sources-list"></div>
-            </div>
-
-            <div class="card">
-                <h2>Q&A Pairs</h2>
-                <div id="qa-list"></div>
-            </div>
-        </section>
-
-        <!-- Fill Questionnaire Tab -->
-        <section id="fill" class="tab-content">
-            <div class="card">
-                <h2>Upload New Questionnaire</h2>
-                <p>Upload a questionnaire to fill, and we'll auto-populate answers from your knowledge base.</p>
-                <div class="upload-area" id="fill-upload">
-                    <input type="file" id="fill-file" accept=".xlsx,.xls,.csv,.docx,.pdf" hidden>
-                    <label for="fill-file" class="upload-label">
-                        <span class="upload-icon">📝</span>
-                        <span>Drop questionnaire here or click to upload</span>
-                        <span class="upload-formats">Supported: Excel, CSV, Word, PDF</span>
-                    </label>
+                <!-- Source Files -->
+                <div class="card">
+                    <h2 class="card-title">Source Files</h2>
+                    <div class="source-files-grid" id="sources-list"></div>
                 </div>
-                <div id="fill-upload-status"></div>
-            </div>
 
-            <div id="fill-results" class="card" style="display: none;">
-                <h2>Auto-Filled Answers</h2>
-                <div id="fill-summary" class="summary-bar"></div>
-                <button id="download-btn" class="btn primary" style="margin-bottom: 16px;">📥 Download Filled Questionnaire</button>
-                <div id="fill-answers"></div>
-            </div>
-        </section>
-
-        <!-- Ask Question Tab -->
-        <section id="ask" class="tab-content">
-            <div class="card">
-                <h2>Ask a Question</h2>
-                <p>Test the system with a single question.</p>
-                <div class="question-input">
-                    <textarea id="question-text" placeholder="Enter your question here..." rows="3"></textarea>
-                    <button id="ask-btn" class="btn primary">Get Answer</button>
+                <!-- Q&A Pairs -->
+                <div class="card">
+                    <h2 class="card-title">Q&A Pairs</h2>
+                    <div class="qa-controls">
+                        <div class="search-wrapper">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            <input type="text" id="qa-search" placeholder="Search questions..." class="search-input">
+                        </div>
+                        <select id="qa-filter-source" class="filter-select">
+                            <option value="">All Sources</option>
+                        </select>
+                    </div>
+                    <div class="qa-count" id="qa-count-display"></div>
+                    <div id="qa-list"></div>
                 </div>
             </div>
+        </section>
 
-            <div id="ask-result" class="card" style="display: none;">
-                <h2>Suggested Answer</h2>
-                <div id="ask-answer"></div>
+        <!-- ==================== FILL QUESTIONNAIRE SCREEN ==================== -->
+        <section id="fill" class="screen">
+            <div class="screen-content">
+                <div class="screen-header">
+                    <h1 class="screen-title">Fill Questionnaire</h1>
+                    <p class="screen-subtitle">Upload a new questionnaire and get AI-generated answers from your knowledge base</p>
+                </div>
+
+                <!-- Upload Card -->
+                <div class="card upload-card">
+                    <div class="upload-area" id="fill-upload">
+                        <input type="file" id="fill-file" accept=".xlsx,.xls,.csv,.docx,.pdf" hidden>
+                        <label for="fill-file" class="upload-label">
+                            <div class="upload-icon-wrapper">
+                                <svg class="upload-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                    <line x1="12" y1="11" x2="12" y2="17"/>
+                                    <polyline points="9,14 12,11 15,14"/>
+                                </svg>
+                            </div>
+                            <span class="upload-title">Drop questionnaire here or click to upload</span>
+                            <span class="upload-formats">Supports Excel, CSV, Word, PDF</span>
+                        </label>
+                    </div>
+                    <div id="fill-upload-status"></div>
+                </div>
+
+                <!-- Results (hidden until upload) -->
+                <div id="fill-results" class="card results-card" style="display: none;">
+                    <h2 class="card-title">Auto-Filled Answers</h2>
+                    <div id="fill-summary" class="confidence-summary"></div>
+                    <button id="download-btn" class="btn primary btn-download">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7,10 12,15 17,10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download Filled Questionnaire
+                    </button>
+                    <div id="fill-answers"></div>
+                </div>
             </div>
         </section>
-    </div>
+
+        <!-- ==================== ASK QUESTION SCREEN ==================== -->
+        <section id="ask" class="screen">
+            <div class="screen-content">
+                <div class="screen-header">
+                    <h1 class="screen-title">Ask a Question</h1>
+                    <p class="screen-subtitle">Test the knowledge base with a single question</p>
+                </div>
+
+                <div class="card question-card">
+                    <div class="question-input-group">
+                        <textarea id="question-text" placeholder="Type your question here..." rows="4" class="question-textarea"></textarea>
+                        <button id="ask-btn" class="btn primary btn-ask">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22,2 15,22 11,13 2,9"/>
+                            </svg>
+                            Get Answer
+                        </button>
+                        <p class="input-hint">Press Enter to submit &middot; Shift+Enter for new line</p>
+                    </div>
+                </div>
+
+                <div id="ask-result" class="card result-card" style="display: none;">
+                    <h2 class="card-title">Suggested Answer</h2>
+                    <div id="ask-answer"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <script src="/static/app.js"></script>
 </body>
