@@ -11,8 +11,8 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "api/index.py" },
-    { "src": "/styles.css", "dest": "/frontend/styles.css" },
-    { "src": "/app.js", "dest": "/frontend/app.js" },
+    { "src": "/static/styles.css", "dest": "/frontend/styles.css" },
+    { "src": "/static/app.js", "dest": "/frontend/app.js" },
     { "src": "/", "dest": "/frontend/index.html" }
   ]
 }
