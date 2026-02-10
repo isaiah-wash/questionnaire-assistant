@@ -1,0 +1,396 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+header .subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0;
+}
+
+.tab {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #666;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    color: #333;
+}
+
+.tab.active {
+    color: #4361ee;
+    border-bottom-color: #4361ee;
+    font-weight: 500;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: #1a1a2e;
+}
+
+.card p {
+    color: #666;
+    margin-bottom: 16px;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed #d0d0d0;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    border-color: #4361ee;
+    background: #f8f9ff;
+}
+
+.upload-area.dragover {
+    border-color: #4361ee;
+    background: #eef1ff;
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 3rem;
+}
+
+.upload-formats {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.stat {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9ff;
+    border-radius: 8px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #4361ee;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn.primary {
+    background: #4361ee;
+    color: white;
+}
+
+.btn.primary:hover {
+    background: #3651d4;
+}
+
+.btn.danger {
+    background: #ef476f;
+    color: white;
+}
+
+.btn.danger:hover {
+    background: #d63d5f;
+}
+
+.btn.small {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* Question Input */
+.question-input {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.question-input textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.question-input textarea:focus {
+    outline: none;
+    border-color: #4361ee;
+}
+
+/* Results */
+.summary-bar {
+    display: flex;
+    gap: 20px;
+    padding: 16px;
+    background: #f8f9ff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.summary-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.summary-dot.high { background: #06d6a0; }
+.summary-dot.medium { background: #ffd166; }
+.summary-dot.low { background: #ef476f; }
+
+/* Answer Cards */
+.answer-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.answer-card.high-confidence {
+    border-left: 4px solid #06d6a0;
+}
+
+.answer-card.medium-confidence {
+    border-left: 4px solid #ffd166;
+}
+
+.answer-card.low-confidence {
+    border-left: 4px solid #ef476f;
+}
+
+.answer-question {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1a1a2e;
+}
+
+.answer-text {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    white-space: pre-wrap;
+}
+
+.answer-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 0.85rem;
+    color: #666;
+    flex-wrap: wrap;
+}
+
+.confidence-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.confidence-badge.high { background: #d4f5e9; color: #06a77d; }
+.confidence-badge.medium { background: #fff3cd; color: #856404; }
+.confidence-badge.low { background: #fde2e8; color: #c82333; }
+
+.needs-review {
+    color: #ef476f;
+    font-weight: 500;
+}
+
+/* Sources List */
+.source-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.source-name {
+    font-weight: 500;
+}
+
+/* QA List */
+.qa-item {
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.qa-item .question {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.qa-item .answer {
+    color: #555;
+    background: #f8f9fa;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.qa-item .source {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Status Messages */
+.status {
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+}
+
+.status.loading {
+    background: #e7f1ff;
+    color: #0066cc;
+}
+
+.status.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Loading spinner */
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ddd;
+    border-top-color: #4361ee;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab {
+        flex: 1;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+}

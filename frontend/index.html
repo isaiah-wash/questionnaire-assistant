@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Assistant</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Questionnaire Assistant</h1>
+            <p class="subtitle">Auto-fill due diligence questionnaires using your previous responses</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab active" data-tab="knowledge">Knowledge Base</button>
+            <button class="tab" data-tab="fill">Fill Questionnaire</button>
+            <button class="tab" data-tab="ask">Ask Question</button>
+        </nav>
+
+        <!-- Knowledge Base Tab -->
+        <section id="knowledge" class="tab-content active">
+            <div class="card">
+                <h2>Upload Completed Questionnaire</h2>
+                <p>Add your previously completed questionnaires to build the knowledge base.</p>
+                <div class="upload-area" id="knowledge-upload">
+                    <input type="file" id="knowledge-file" accept=".xlsx,.xls,.csv,.docx,.pdf" hidden>
+                    <label for="knowledge-file" class="upload-label">
+                        <span class="upload-icon">📄</span>
+                        <span>Drop file here or click to upload</span>
+                        <span class="upload-formats">Supported: Excel, CSV, Word, PDF</span>
+                    </label>
+                </div>
+                <div id="knowledge-upload-status"></div>
+            </div>
+
+            <div class="card">
+                <h2>Knowledge Base Stats</h2>
+                <div id="kb-stats" class="stats-grid">
+                    <div class="stat">
+                        <span class="stat-value" id="stat-total">-</span>
+                        <span class="stat-label">Q&A Pairs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="stat-sources">-</span>
+                        <span class="stat-label">Source Files</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Source Files</h2>
+                <div id="sources-list"></div>
+            </div>
+
+            <div class="card">
+                <h2>Q&A Pairs</h2>
+                <div id="qa-list"></div>
+            </div>
+        </section>
+
+        <!-- Fill Questionnaire Tab -->
+        <section id="fill" class="tab-content">
+            <div class="card">
+                <h2>Upload New Questionnaire</h2>
+                <p>Upload a questionnaire to fill, and we'll auto-populate answers from your knowledge base.</p>
+                <div class="upload-area" id="fill-upload">
+                    <input type="file" id="fill-file" accept=".xlsx,.xls,.csv,.docx,.pdf" hidden>
+                    <label for="fill-file" class="upload-label">
+                        <span class="upload-icon">📝</span>
+                        <span>Drop questionnaire here or click to upload</span>
+                        <span class="upload-formats">Supported: Excel, CSV, Word, PDF</span>
+                    </label>
+                </div>
+                <div id="fill-upload-status"></div>
+            </div>
+
+            <div id="fill-results" class="card" style="display: none;">
+                <h2>Auto-Filled Answers</h2>
+                <div id="fill-summary" class="summary-bar"></div>
+                <button id="download-btn" class="btn primary" style="margin-bottom: 16px;">📥 Download Filled Questionnaire</button>
+                <div id="fill-answers"></div>
+            </div>
+        </section>
+
+        <!-- Ask Question Tab -->
+        <section id="ask" class="tab-content">
+            <div class="card">
+                <h2>Ask a Question</h2>
+                <p>Test the system with a single question.</p>
+                <div class="question-input">
+                    <textarea id="question-text" placeholder="Enter your question here..." rows="3"></textarea>
+                    <button id="ask-btn" class="btn primary">Get Answer</button>
+                </div>
+            </div>
+
+            <div id="ask-result" class="card" style="display: none;">
+                <h2>Suggested Answer</h2>
+                <div id="ask-answer"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
