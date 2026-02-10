@@ -1,0 +1,7 @@
+[project]
+name = "questionnaire-assistant"
+version = "1.0.0"
+requires-python = ">=3.9"
+
+[tool.vercel]
+app = "api.index:app"
