@@ -3,16 +3,10 @@
     {
       "src": "api/index.py",
       "use": "@vercel/python"
-    },
-    {
-      "src": "frontend/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "api/index.py" },
-    { "src": "/(.*\\.css)", "dest": "/frontend/$1" },
-    { "src": "/(.*\\.js)", "dest": "/frontend/$1" },
-    { "src": "/", "dest": "/frontend/index.html" }
+    { "src": "/(.*)", "dest": "/frontend/$1" }
   ]
 }
