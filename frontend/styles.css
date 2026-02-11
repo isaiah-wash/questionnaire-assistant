@@ -873,6 +873,46 @@ body {
     to { transform: rotate(360deg); }
 }
 
+/* ---------- Upload Success Confirmation ---------- */
+.upload-success {
+    padding: 32px 24px;
+    background: var(--color-success-bg);
+    border: 1px solid rgba(6, 214, 160, 0.25);
+    border-radius: var(--radius-md);
+    margin-top: 16px;
+    animation: slideUp 0.4s var(--ease-out) both;
+}
+
+.upload-success-icon {
+    color: var(--color-success);
+    margin-bottom: 12px;
+}
+
+.upload-success-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #059b7a;
+    margin-bottom: 8px;
+}
+
+.upload-success-file {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.6);
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.upload-success-count {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #059b7a;
+}
+
 /* ---------- Empty State ---------- */
 .empty-state {
     text-align: center;

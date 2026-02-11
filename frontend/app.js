@@ -77,7 +77,19 @@ async function uploadToKnowledge(file, statusDiv) {
         const data = await response.json();
 
         if (response.ok) {
-            statusDiv.innerHTML = `<div class="status success">${data.message}</div>`;
+            statusDiv.innerHTML = `
+                <div class="upload-success">
+                    <div class="upload-success-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="upload-success-title">Document Successfully Scraped</div>
+                    <div class="upload-success-file">${escapeHtml(data.source_file)}</div>
+                    <div class="upload-success-count">${data.count} Q&A pair${data.count !== 1 ? 's' : ''} extracted and added to the knowledge base</div>
+                </div>
+            `;
             loadKnowledgeBase();
         } else {
             statusDiv.innerHTML = `<div class="status error">Error: ${data.detail}</div>`;
